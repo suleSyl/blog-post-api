@@ -39,7 +39,7 @@ public class BlogPostController {
 	
 	@PutMapping("/posts/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-	public ResponseEntity<Post> updatePost(@PathVariable Long postId, @Validated @RequestBody Post postDetails) {
+	public ResponseEntity<Post> updatePost(@PathVariable int postId, @Validated @RequestBody Post postDetails) {
 		return postRepository.findById(postId).map(post -> {
 			post.setPostHeader(postDetails.getPostHeader());
 			post.setPostBody(postDetails.getPostBody());

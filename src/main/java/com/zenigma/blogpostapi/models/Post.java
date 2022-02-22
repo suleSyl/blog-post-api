@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -17,34 +20,38 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Post {	
 	
 	@Id @GeneratedValue
-	@Column(name="ID")
-	private Long id;
+	@Column(name="id")
+	private int id;
 	
-	@JoinColumn(name = "AuthorId", referencedColumnName = "ID", nullable = false)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "AuthorId", referencedColumnName = "id", nullable = true)
 	@ManyToOne(optional = false)               
 	@JsonIgnoreProperties({"postsAuthoredList"})
 	private Author authorId = new Author();
 	
 	@Column(name="NumberOfReaders")
-	private int numberOfReaders = 0;
+	private Integer numberOfReaders = null;
 	
 	@Column(name="PostHeader")
-	private String postHeader;
+	private String postHeader = null;
 	
 	@Column(name="PostBody")
-	private String postBody;
+	private String postBody = null;
 	
 	@Column(name="AdditionalInfo")
-	private String additionalInfo;
+	private String additionalInfo = null;
 	
 	@Column(name="CreationDateTime")
-	private LocalDateTime creationDateTime;
+	private LocalDateTime creationDateTime = null;
 	
 	@Column(name="ModificationDateTime")
-	private LocalDateTime modificationDateTime;
+	private LocalDateTime modificationDateTime = null;
 	
 	@Column(name="IsActive")
-	private Boolean isActive;
+	private Boolean isActive = null;
+	
+	public Post() {		
+	}
 	
 	public Post(Author authorId, String postHeader, String postBody) {
 		this.creationDateTime = LocalDateTime.now();
@@ -53,11 +60,11 @@ public class Post {
 		this.postBody = postBody;
 	}	
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -69,11 +76,11 @@ public class Post {
 		this.authorId = authorId;
 	}
 	
-	public int getNumberOfReaders() {
+	public Integer getNumberOfReaders() {
 		return numberOfReaders;
 	}
 	
-	public void setNumberOfReaders(int numberOfReaders) {
+	public void setNumberOfReaders(Integer numberOfReaders) {
 		this.numberOfReaders = numberOfReaders;
 	}
 	

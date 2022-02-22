@@ -16,35 +16,35 @@ import javax.persistence.Table;
 public class Author {
 	
 	@Id @GeneratedValue
-	@Column(name="ID")
-	private Long id;
+	@Column(name="id")
+	private int id;
 	
 	@Column(name="Name")
-	private String name;
+	private String name = null;
 	
 	@Column(name="Surname")
-	private String surname;
+	private String surname = null;
 	
 	@Column(name="Email")
-	private String email;
+	private String email = null;
 	
 	@Column(name="Username")
-	private String username;
+	private String username = null;
 	
 	@Column(name="PhoneNumber")
-	private String phoneNumber;
+	private String phoneNumber = null;
 	
 	@Column(name="Address")
-	private String address;
+	private String address = null;
 	
 	@Column(name="Birthday")
-	private LocalDateTime birthday;
+	private LocalDateTime birthday = null;
 	
 	@Column(name="MemberSince")
-	private LocalDateTime memberSince; 
+	private LocalDateTime memberSince = null; 
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")      
-	private List<Post> postsAuthoredList;
+	private List<Post> postsAuthoredList = null;
 	
 	public Author() {		
 	}
@@ -61,11 +61,11 @@ public class Author {
 		this.postsAuthoredList = builder.postsAuthoredList;
 	}
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
